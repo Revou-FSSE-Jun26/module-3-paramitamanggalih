@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript DOM Exercise</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        main {
+            width: min(800px, 92%);
+            margin: 50px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        button {
+            border: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .highlight {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        form {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        #form-message {
+            margin-top: 12px;
+            font-weight: 700;
+            color: #15803d;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section class="card">
+            <h1 id="title">JavaScript DOM Exercise</h1>
+
+            <p id="description">
+                This page demonstrates DOM selection, element updates,
+                class toggling, element creation, element removal,
+                click events, and form submission.
+            </p>
+
+            <div class="actions">
+                <button id="change-text-btn" type="button">
+                    Change Text
+                </button>
+
+                <button id="toggle-btn" type="button">
+                    Toggle Highlight
+                </button>
+
+                <button id="add-btn" type="button">
+                    Add Item
+                </button>
+
+                <button id="remove-btn" type="button">
+                    Remove Last Item
+                </button>
+            </div>
+
+            <h2>Dynamic Items</h2>
+
+            <ul id="item-list">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+            </ul>
+
+            <form id="contact-form">
+                <label for="visitor-name">
+                    Your Name
+                </label>
+
+                <input
+                    type="text"
+                    id="visitor-name"
+                    name="visitor-name"
+                    placeholder="Enter your name"
+                    required
+                >
+
+                <button type="submit">
+                    Submit
+                </button>
+
+                <p id="form-message"></p>
+            </form>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
