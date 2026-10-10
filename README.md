@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RevoShop Frontend — Checkpoint 2
 
-## Getting Started
+RevoShop is an online store frontend built with Next.js App Router, React, TypeScript, and Tailwind CSS. It fetches product, category, and order data from the Flask API developed in Module 2.
 
-First, run the development server:
+## Technologies
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Next.js App Router
+- React and TypeScript
+- Tailwind CSS
+- Flask REST API
+- PostgreSQL
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Reusable Header, Footer, Card, and ProductCard components
+- Quantity counter and stock-aware product buttons
+- Controlled product search
+- Category filtering synchronized with URL query parameters
+- Shopping cart summary with item count and total price
+- Client-side Add Product form validation
+- Server Component data fetching from Flask API
+- Dynamic metadata for product detail pages
+- Loading skeletons and friendly error states
+- Responsive layouts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+- `app/` — pages, layouts, loading and error states
+- `app/products/[id]/` — dynamic product detail page
+- `components/` — reusable typed React components
+- `lib/api.ts` — Flask API fetch utilities
+- `types/product.ts` — shared TypeScript data types
+- `docs/screenshots/` — local demo evidence
 
-To learn more about Next.js, take a look at the following resources:
+## Prerequisites
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Node.js 20.9 or later
+- npm
+- PostgreSQL and the Module 2 Flask API
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Environment Configuration
 
-## Deploy on Vercel
+Create a local `.env.local` file with this variable:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:5000`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The `.env.local` file must remain excluded from Git. Use `.env.example` as a reference for environment configuration. Never commit actual credentials or secret keys.
+
+## Running Locally
+
+Start the Flask API in a separate terminal:
+
+    cd D:\revoshop-db
+    .\venv\Scripts\Activate.ps1
+    python run.py
+
+Start Next.js in another terminal:
+
+    cd D:\revoshop-checkpoint-2
+    npm install
+    npm run dev
+
+Open http://localhost:3000 in your browser.
+
+## API Endpoints
+
+- `GET /products`
+- `GET /products/<id>`
+- `GET /categories`
+- `GET /orders?limit=20&offset=0`
+
+The Orders endpoint supports pagination to limit response size.
+
+## Main Routes
+
+| Route | Description |
+|---|---|
+| `/` | Home page with up to five featured products |
+| `/products` | Product catalog, search, category filter, and cart summary |
+| `/products/[id]` | Product details with dynamic metadata |
+| `/categories` | Category listing and product counts |
+| `/orders` | Recent orders and order items |
+
+## Validation
+
+TypeScript check:
+
+    npx tsc --noEmit
+
+Production build:
+
+    npm run build
+
+## Demo Evidence
+
+Store local demo screenshots in `docs/screenshots/`. Include the Home page, product search and category filter, product detail with dynamic title, and loading/error states.
+
+## Scope Note
+
+The Add Product form currently updates local component state. Real POST, PUT, and DELETE operations, authentication, and checkout are reserved for Checkpoint 3.
