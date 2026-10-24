@@ -2,10 +2,12 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
 import ProductCard from "@/components/ProductCard";
 import SearchBar from "@/components/SearchBar";
 import AddProductForm, { type NewProduct } from "@/components/AddProductForm";
-import type { CartItem, Category, Product } from "@/types/product";
+import { useCart } from "@/context/CartContext";
+import type { Category, Product } from "@/types/product";
 
 interface ProductGridProps {
   products: Product[];
@@ -19,13 +21,13 @@ export default function ProductGrid({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { items, cartCount, cartTotal, addItem, updateQuantity } = useCart();
 
   const [search, setSearch] = useState(searchParams.get("search") ?? "");
   const [categoryId, setCategoryId] = useState(
     searchParams.get("category") ?? "all"
   );
   const [localProducts, setLocalProducts] = useState<Product[]>([]);
-  const [cart, setCart] = useState<CartItem[]>([]);
 
   useEffect(() => {
     setSearch(searchParams.get("search") ?? "");
@@ -48,6 +50,7 @@ export default function ProductGrid({
     }
 
     const query = params.toString();
+
     router.replace(query ? `${pathname}?${query}` : pathname, {
       scroll: false,
     });
@@ -60,7 +63,9 @@ export default function ProductGrid({
     return allProducts.filter((product) => {
       const matchesSearch =
         product.name.toLowerCase().includes(normalizedSearch) ||
-        (product.description ?? "").toLowerCase().includes(normalizedSearch);
+        (product.description ?? "")
+          .toLowerCase()
+          .includes(normalizedSearch);
 
       const matchesCategory =
         categoryId === "all" ||
@@ -70,35 +75,59 @@ export default function ProductGrid({
     });
   }, [products, localProducts, search, categoryId]);
 
-  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
-  const cartTotal = cart.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
-
   function handleAddToCart(item: {
     id?: number | string;
     name: string;
     price: number;
     quantity: number;
   }) {
-    const itemId = item.id ?? item.name;
+    if (typeof item.id !== "number") {
+      toast.error("This product cannot be added to the cart.");
+      return;
+    }
 
-    setCart((currentCart) => {
-      const existingItem = currentCart.find(
-        (cartItem) => String(cartItem.id) === String(itemId)
-      );
+    // Only database products can be checked out through the API.
+    const product = products.find((candidate) => candidate.id === item.id);
 
-      if (existingItem) {
-        return currentCart.map((cartItem) =>
-          String(cartItem.id) === String(itemId)
-            ? { ...cartItem, quantity: cartItem.quantity + item.quantity }
-            : cartItem
-        );
+    if (!product) {
+      toast.error("This preview product is not saved in the database.");
+      return;
+    }
+
+    if (product.stock <= 0) {
+      toast.error("This product is out of stock.");
+      return;
+    }
+
+    const existingItem = items.find(
+      (cartItem) => cartItem.id === product.id
+    );
+
+    const currentQuantity = existingItem?.quantity ?? 0;
+    const nextQuantity = Math.min(
+      product.stock,
+      currentQuantity + item.quantity
+    );
+
+    if (nextQuantity === currentQuantity) {
+      toast.error("You already have the maximum available stock in your cart.");
+      return;
+    }
+
+    if (existingItem) {
+      updateQuantity(product.id, nextQuantity);
+    } else {
+      for (let index = 0; index < nextQuantity; index += 1) {
+        addItem({
+          id: product.id,
+          name: product.name,
+          price: Number(product.price),
+          stock: product.stock,
+        });
       }
+    }
 
-      return [...currentCart, { ...item, id: itemId }];
-    });
+    toast.success(`${product.name} added to cart.`);
   }
 
   function handleAddProduct(newProduct: NewProduct) {
@@ -120,6 +149,12 @@ export default function ProductGrid({
     setLocalProducts((currentProducts) => [...currentProducts, product]);
   }
 
+  const formattedCartTotal = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0,
+  }).format(cartTotal);
+
   return (
     <section className="mx-auto max-w-7xl space-y-8 px-4 py-10 sm:px-6 lg:px-8">
       <div>
@@ -138,13 +173,23 @@ export default function ProductGrid({
         <form
           onSubmit={(event) => {
             event.preventDefault();
+
             const params = new URLSearchParams(searchParams.toString());
-            if (search.trim()) params.set("search", search.trim());
-            else params.delete("search");
-            if (categoryId !== "all") params.set("category", categoryId);
-            else params.delete("category");
+
+            if (search.trim()) {
+              params.set("search", search.trim());
+            } else {
+              params.delete("search");
+            }
+
+            if (categoryId !== "all") {
+              params.set("category", categoryId);
+            } else {
+              params.delete("category");
+            }
 
             const query = params.toString();
+
             router.push(query ? `${pathname}?${query}` : pathname, {
               scroll: false,
             });
@@ -160,6 +205,7 @@ export default function ProductGrid({
               }}
             />
           </div>
+
           <button
             type="submit"
             className="rounded-xl bg-blue-700 px-5 py-3 font-semibold text-white hover:bg-blue-800"
@@ -175,6 +221,7 @@ export default function ProductGrid({
           >
             Filter by category
           </label>
+
           <select
             id="category-filter"
             value={categoryId}
@@ -201,12 +248,9 @@ export default function ProductGrid({
             {cartCount} item(s)
           </p>
         </div>
+
         <p className="text-lg font-bold text-blue-700">
-          {new Intl.NumberFormat("id-ID", {
-            style: "currency",
-            currency: "IDR",
-            maximumFractionDigits: 0,
-          }).format(cartTotal)}
+          {formattedCartTotal}
         </p>
       </div>
 
@@ -222,8 +266,9 @@ export default function ProductGrid({
               stock={product.stock}
               category={
                 product.category ??
-                categories.find((category) => category.id === product.category_id)
-                  ?.name ??
+                categories.find(
+                  (category) => category.id === product.category_id
+                )?.name ??
                 "General"
               }
               onAddToCart={handleAddToCart}
