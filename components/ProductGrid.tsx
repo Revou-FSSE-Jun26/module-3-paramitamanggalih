@@ -158,7 +158,7 @@ export default function ProductGrid({
   return (
     <section className="mx-auto max-w-7xl space-y-8 px-4 py-10 sm:px-6 lg:px-8">
       <div>
-        <p className="text-sm font-semibold uppercase tracking-widest text-blue-700">
+        <p className="text-sm font-semibold uppercase tracking-widest text-orange-600">
           RevoShop Collection
         </p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
@@ -208,7 +208,7 @@ export default function ProductGrid({
 
           <button
             type="submit"
-            className="rounded-xl bg-blue-700 px-5 py-3 font-semibold text-white hover:bg-blue-800"
+            className="rounded-xl bg-orange-600 px-5 py-3 font-semibold text-white hover:bg-orange-700"
           >
             Search
           </button>
@@ -241,7 +241,7 @@ export default function ProductGrid({
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-blue-50 p-5">
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-orange-50 p-5">
         <div>
           <p className="text-sm text-slate-600">Shopping cart</p>
           <p className="text-lg font-bold text-slate-900">
@@ -249,7 +249,7 @@ export default function ProductGrid({
           </p>
         </div>
 
-        <p className="text-lg font-bold text-blue-700">
+        <p className="text-lg font-bold text-orange-600">
           {formattedCartTotal}
         </p>
       </div>

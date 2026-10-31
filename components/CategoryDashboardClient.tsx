@@ -179,12 +179,12 @@ export default function CategoryDashboardClient() {
         <div>
           <Link
             href="/dashboard"
-            className="text-sm font-semibold text-blue-700 hover:text-blue-900"
+            className="text-sm font-semibold text-orange-600 hover:text-orange-800"
           >
             ← Back to Product Dashboard
           </Link>
 
-          <p className="mt-6 text-sm font-semibold uppercase tracking-widest text-blue-700">
+          <p className="mt-6 text-sm font-semibold uppercase tracking-widest text-orange-600">
             Administration
           </p>
 
@@ -220,7 +220,7 @@ export default function CategoryDashboardClient() {
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 placeholder="For example, Electronics"
-                className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100"
               />
             </div>
 
@@ -228,7 +228,7 @@ export default function CategoryDashboardClient() {
               <button
                 type="submit"
                 disabled={isSaving}
-                className="rounded-xl bg-blue-700 px-5 py-3 font-semibold text-white hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-50"
+                className="rounded-xl bg-orange-600 px-5 py-3 font-semibold text-white hover:bg-orange-700 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {isSaving
                   ? "Saving..."

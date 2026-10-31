@@ -25,7 +25,7 @@ export default function HomeError({ error, reset }: HomeErrorProps) {
       <button
         type="button"
         onClick={() => reset()}
-        className="mt-6 rounded-xl bg-blue-700 px-5 py-3 font-semibold text-white hover:bg-blue-800"
+        className="mt-6 rounded-xl bg-orange-600 px-5 py-3 font-semibold text-white hover:bg-orange-700"
       >
         Try again
       </button>

@@ -1,11 +1,11 @@
 export default function HomeLoading() {
   return (
     <div>
-      <section className="animate-pulse bg-blue-800 px-4 py-16 sm:px-6 lg:px-8">
+      <section className="animate-pulse bg-orange-700 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="h-4 w-40 rounded bg-blue-400" />
-          <div className="mt-5 h-12 max-w-xl rounded bg-blue-400" />
-          <div className="mt-4 h-5 max-w-lg rounded bg-blue-400" />
+          <div className="h-4 w-40 rounded bg-orange-400" />
+          <div className="mt-5 h-12 max-w-xl rounded bg-orange-400" />
+          <div className="mt-4 h-5 max-w-lg rounded bg-orange-400" />
           <div className="mt-7 h-12 w-44 rounded-xl bg-white/70" />
         </div>
       </section>

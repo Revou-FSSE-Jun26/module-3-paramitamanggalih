@@ -49,7 +49,7 @@ export default function CartPageClient() {
   return (
     <section className="mx-auto max-w-5xl space-y-8 px-4 py-10 sm:px-6 lg:px-8">
       <div>
-        <p className="text-sm font-semibold uppercase tracking-widest text-blue-700">
+        <p className="text-sm font-semibold uppercase tracking-widest text-orange-600">
           RevoShop
         </p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
@@ -70,7 +70,7 @@ export default function CartPageClient() {
           </p>
           <Link
             href="/products"
-            className="mt-6 inline-flex rounded-xl bg-blue-700 px-5 py-3 font-semibold text-white hover:bg-blue-800"
+            className="mt-6 inline-flex rounded-xl bg-orange-600 px-5 py-3 font-semibold text-white hover:bg-orange-700"
           >
             Browse Products
           </Link>
@@ -86,14 +86,14 @@ export default function CartPageClient() {
                 <div className="min-w-0 flex-1">
                   <Link
                     href={`/products/${item.id}`}
-                    className="text-lg font-bold text-slate-900 hover:text-blue-700"
+                    className="text-lg font-bold text-slate-900 hover:text-orange-600"
                   >
                     {item.name}
                   </Link>
                   <p className="mt-1 text-sm text-slate-600">
                     {formatCurrency(item.price)} each
                   </p>
-                  <p className="mt-2 font-semibold text-blue-700">
+                  <p className="mt-2 font-semibold text-orange-600">
                     Subtotal: {formatCurrency(item.price * item.quantity)}
                   </p>
                 </div>
@@ -172,7 +172,7 @@ export default function CartPageClient() {
 
               <div className="text-right">
                 <p className="text-sm text-slate-600">Order total</p>
-                <p className="mt-1 text-2xl font-bold text-blue-700">
+                <p className="mt-1 text-2xl font-bold text-orange-600">
                   {formatCurrency(cartTotal)}
                 </p>
               </div>
@@ -182,14 +182,14 @@ export default function CartPageClient() {
               type="button"
               onClick={handleCheckout}
               disabled={items.length === 0}
-              className="mt-6 w-full rounded-xl bg-blue-700 px-5 py-3 font-semibold text-white hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-50"
+              className="mt-6 w-full rounded-xl bg-orange-600 px-5 py-3 font-semibold text-white hover:bg-orange-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
               Proceed to Checkout
             </button>
 
             <Link
               href="/products"
-              className="mt-4 block text-center text-sm font-semibold text-blue-700 hover:text-blue-900"
+              className="mt-4 block text-center text-sm font-semibold text-orange-600 hover:text-orange-800"
             >
               Continue Shopping
             </Link>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Card from "@/components/Card";
+import ProductImage from "@/components/ProductImage";
 
 export interface ProductCardProps {
   id?: number | string;
@@ -50,8 +51,9 @@ export default function ProductCard({
 
   return (
     <Card className="flex h-full flex-col p-5">
+      <ProductImage name={name} className="mb-5 aspect-[4/3] w-full rounded-xl" />
       <div className="mb-4 flex items-start justify-between gap-3">
-        <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+        <span className="rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold text-orange-600">
           {category}
         </span>
 
@@ -72,7 +74,7 @@ export default function ProductCard({
         {description}
       </p>
 
-      <p className="mt-5 text-xl font-bold text-blue-700">
+      <p className="mt-5 text-xl font-bold text-orange-600">
         {formattedPrice}
       </p>
 
@@ -116,7 +118,7 @@ export default function ProductCard({
         disabled={!isInStock || !onAddToCart}
         className={`mt-4 w-full rounded-xl px-4 py-3 text-sm font-semibold text-white transition-colors ${
           isInStock && onAddToCart
-            ? "bg-blue-700 hover:bg-blue-800"
+            ? "bg-orange-600 hover:bg-orange-700"
             : "cursor-not-allowed bg-slate-400"
         }`}
       >
@@ -126,7 +128,7 @@ export default function ProductCard({
       {id !== undefined && (
         <Link
           href={`/products/${id}`}
-          className="mt-3 block text-center text-sm font-semibold text-blue-700 hover:text-blue-900"
+          className="mt-3 block text-center text-sm font-semibold text-orange-600 hover:text-orange-800"
         >
           View details
         </Link>

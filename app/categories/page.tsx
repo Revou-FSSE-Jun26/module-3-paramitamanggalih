@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Card from "@/components/Card";
 import { getCategories, getProducts } from "@/lib/api";
+import {
+  filterCatalogCategories,
+  filterCatalogProducts,
+} from "@/lib/catalog";
 
 export const metadata: Metadata = {
   title: "Categories",
@@ -11,14 +15,17 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function CategoriesPage() {
-  const [categories, products] = await Promise.all([
+  const [allCategories, allProducts] = await Promise.all([
     getCategories(),
     getProducts(),
   ]);
 
+  const categories = filterCatalogCategories(allCategories);
+  const products = filterCatalogProducts(allProducts);
+
   return (
     <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-      <p className="text-sm font-semibold uppercase tracking-widest text-blue-700">
+      <p className="text-sm font-semibold uppercase tracking-widest text-orange-600">
         Browse by category
       </p>
 
@@ -49,7 +56,7 @@ export default async function CategoriesPage() {
 
                 <Link
                   href={`/categories/${category.id}`}
-                  className="mt-5 inline-flex rounded-lg bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800"
+                  className="mt-5 inline-flex rounded-lg bg-orange-600 px-4 py-2 text-sm font-semibold text-white hover:bg-orange-700"
                 >
                   View products
                 </Link>

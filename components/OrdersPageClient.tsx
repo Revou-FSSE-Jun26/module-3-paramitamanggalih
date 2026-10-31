@@ -146,7 +146,7 @@ export default function OrdersPageClient() {
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-      <p className="text-sm font-semibold uppercase tracking-widest text-blue-700">
+      <p className="text-sm font-semibold uppercase tracking-widest text-orange-600">
         My Account
       </p>
 
@@ -184,17 +184,17 @@ export default function OrdersPageClient() {
                 </div>
 
                 <div className="sm:text-right">
-                  <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold capitalize text-blue-700">
+                  <span className="inline-flex rounded-full bg-orange-50 px-3 py-1 text-sm font-semibold capitalize text-orange-600">
                     {order.status}
                   </span>
 
-                  <p className="mt-2 text-xl font-bold text-blue-700">
+                  <p className="mt-2 text-xl font-bold text-orange-600">
                     {formatPrice(order.total)}
                   </p>
 
                   <Link
                     href={`/orders/${order.id}`}
-                    className="mt-3 inline-block text-sm font-semibold text-blue-700 hover:text-blue-900"
+                    className="mt-3 inline-block text-sm font-semibold text-orange-600 hover:text-orange-800"
                   >
                     View order details →
                   </Link>
@@ -217,7 +217,7 @@ export default function OrdersPageClient() {
 
           <Link
             href="/products"
-            className="mt-5 inline-flex rounded-xl bg-blue-700 px-5 py-3 font-semibold text-white hover:bg-blue-800"
+            className="mt-5 inline-flex rounded-xl bg-orange-600 px-5 py-3 font-semibold text-white hover:bg-orange-700"
           >
             Browse Products
           </Link>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Card from "@/components/Card";
+import ProductImage from "@/components/ProductImage";
 import { getProduct, getCategories } from "@/lib/api";
 
 type ProductDetailProps = {
@@ -62,14 +63,15 @@ export default async function ProductDetailPage({
     <section className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
       <Link
         href="/products"
-        className="text-sm font-semibold text-blue-700 hover:text-blue-900"
+        className="text-sm font-semibold text-orange-600 hover:text-orange-800"
       >
         Back to products
       </Link>
 
       <div className="mt-6 grid gap-6 md:grid-cols-[1.2fr_0.8fr]">
         <Card className="p-6 sm:p-8">
-          <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700">
+          <ProductImage name={product.name} className="mb-6 aspect-[16/10] w-full rounded-xl" />
+          <span className="inline-flex rounded-full bg-orange-50 px-3 py-1 text-sm font-semibold text-orange-600">
             {categoryName}
           </span>
 
@@ -83,7 +85,7 @@ export default async function ProductDetailPage({
 
           <div className="mt-8 border-t border-slate-200 pt-6">
             <p className="text-sm text-slate-500">Price</p>
-            <p className="mt-1 text-3xl font-bold text-blue-700">
+            <p className="mt-1 text-3xl font-bold text-orange-600">
               {formatPrice(Number(product.price))}
             </p>
           </div>
@@ -114,7 +116,7 @@ export default async function ProductDetailPage({
 
           <Link
             href="/products"
-            className="mt-6 block rounded-xl bg-blue-700 px-4 py-3 text-center font-semibold text-white hover:bg-blue-800"
+            className="mt-6 block rounded-xl bg-orange-600 px-4 py-3 text-center font-semibold text-white hover:bg-orange-700"
           >
             Browse products
           </Link>

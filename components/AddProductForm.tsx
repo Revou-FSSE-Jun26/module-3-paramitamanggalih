@@ -85,7 +85,7 @@ export default function AddProductForm({
           value={name}
           onChange={(event) => setName(event.target.value)}
           required
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+          className="w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100"
         />
       </div>
 
@@ -98,7 +98,7 @@ export default function AddProductForm({
           value={description}
           onChange={(event) => setDescription(event.target.value)}
           rows={3}
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+          className="w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100"
         />
       </div>
 
@@ -115,7 +115,7 @@ export default function AddProductForm({
             value={price}
             onChange={(event) => setPrice(event.target.value)}
             required
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+            className="w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100"
           />
         </div>
 
@@ -131,7 +131,7 @@ export default function AddProductForm({
             value={stock}
             onChange={(event) => setStock(event.target.value)}
             required
-            className="w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+            className="w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100"
           />
         </div>
       </div>
@@ -145,7 +145,7 @@ export default function AddProductForm({
           value={category}
           onChange={(event) => setCategory(event.target.value)}
           required
-          className="w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+          className="w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-100"
         />
       </div>
 
@@ -157,7 +157,7 @@ export default function AddProductForm({
 
       <button
         type="submit"
-        className="w-full rounded-xl bg-blue-700 px-4 py-3 font-semibold text-white transition-colors hover:bg-blue-800"
+        className="w-full rounded-xl bg-orange-600 px-4 py-3 font-semibold text-white transition-colors hover:bg-orange-700"
       >
         Add Product
       </button>

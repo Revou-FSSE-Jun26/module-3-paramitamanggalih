@@ -236,7 +236,7 @@ export default function ProductDashboardClient() {
       <section className="mx-auto max-w-7xl space-y-8 px-4 py-10 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-blue-700">
+            <p className="text-sm font-semibold uppercase tracking-widest text-orange-600">
               Administration
             </p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
@@ -388,7 +388,7 @@ export default function ProductDashboardClient() {
               <button
                 type="submit"
                 disabled={isSaving || categories.length === 0}
-                className="rounded-xl bg-blue-700 px-5 py-3 font-semibold text-white hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-50"
+                className="rounded-xl bg-orange-600 px-5 py-3 font-semibold text-white hover:bg-orange-700 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {isSaving
                   ? "Saving..."

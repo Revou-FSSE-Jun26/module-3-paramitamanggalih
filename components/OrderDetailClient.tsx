@@ -217,7 +217,7 @@ export default function OrderDetailClient({ id }: { id: string }) {
         </p>
         <Link
           href="/orders"
-          className="mt-6 inline-flex rounded-xl bg-blue-700 px-5 py-3 font-semibold text-white hover:bg-blue-800"
+          className="mt-6 inline-flex rounded-xl bg-orange-600 px-5 py-3 font-semibold text-white hover:bg-orange-700"
         >
           Back to My Orders
         </Link>
@@ -229,7 +229,7 @@ export default function OrderDetailClient({ id }: { id: string }) {
     <section className="mx-auto max-w-4xl space-y-8 px-4 py-10 sm:px-6 lg:px-8">
       <Link
         href="/orders"
-        className="text-sm font-semibold text-blue-700 hover:text-blue-900"
+        className="text-sm font-semibold text-orange-600 hover:text-orange-800"
       >
         ← Back to My Orders
       </Link>
@@ -243,7 +243,7 @@ export default function OrderDetailClient({ id }: { id: string }) {
       {order && (
         <>
           <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-blue-700">
+            <p className="text-sm font-semibold uppercase tracking-widest text-orange-600">
               Order Details
             </p>
             <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
@@ -258,14 +258,14 @@ export default function OrderDetailClient({ id }: { id: string }) {
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="text-sm text-slate-500">Order status</p>
-                <span className="mt-2 inline-flex rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold capitalize text-blue-700">
+                <span className="mt-2 inline-flex rounded-full bg-orange-50 px-3 py-1 text-sm font-semibold capitalize text-orange-600">
                   {order.status}
                 </span>
               </div>
 
               <div className="sm:text-right">
                 <p className="text-sm text-slate-500">Order total</p>
-                <p className="mt-1 text-2xl font-bold text-blue-700">
+                <p className="mt-1 text-2xl font-bold text-orange-600">
                   {formatPrice(order.total)}
                 </p>
               </div>

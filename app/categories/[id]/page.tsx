@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Card from "@/components/Card";
+import ProductImage from "@/components/ProductImage";
 import { getCategory } from "@/lib/api";
+import {
+  filterCatalogProducts,
+  isCatalogCategory,
+} from "@/lib/catalog";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +30,10 @@ export async function generateMetadata({
 
   try {
     const category = await getCategory(id);
+
+    if (!isCatalogCategory(category)) {
+      return { title: "Category Not Found" };
+    }
 
     return {
       title: `${category.name} Products`,
@@ -66,17 +75,23 @@ export default async function CategoryDetailPage({
     throw error;
   }
 
+  if (!isCatalogCategory(category)) {
+    notFound();
+  }
+
+  const products = filterCatalogProducts(category.products);
+
   return (
     <section className="mx-auto max-w-7xl space-y-8 px-4 py-10 sm:px-6 lg:px-8">
       <div>
         <Link
           href="/categories"
-          className="text-sm font-semibold text-blue-700 hover:text-blue-900"
+          className="text-sm font-semibold text-orange-600 hover:text-orange-800"
         >
           ← Back to Categories
         </Link>
 
-        <p className="mt-6 text-sm font-semibold uppercase tracking-widest text-blue-700">
+        <p className="mt-6 text-sm font-semibold uppercase tracking-widest text-orange-600">
           Product Category
         </p>
 
@@ -85,14 +100,19 @@ export default async function CategoryDetailPage({
         </h1>
 
         <p className="mt-2 text-slate-600">
-          {category.products.length} product(s) available in this category.
+          {products.length} product(s) available in this category.
         </p>
       </div>
 
-      {category.products.length > 0 ? (
+      {products.length > 0 ? (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {category.products.map((product) => (
+          {products.map((product) => (
             <Card key={product.id} className="flex h-full flex-col p-6">
+              <ProductImage
+                name={product.name}
+                className="mb-5 aspect-[4/3] w-full rounded-xl"
+              />
+
               <h2 className="text-xl font-bold text-slate-900">
                 {product.name}
               </h2>
@@ -101,7 +121,7 @@ export default async function CategoryDetailPage({
                 {product.description || "No description available."}
               </p>
 
-              <p className="mt-5 text-xl font-bold text-blue-700">
+              <p className="mt-5 text-xl font-bold text-orange-600">
                 {formatPrice(product.price)}
               </p>
 
@@ -113,7 +133,7 @@ export default async function CategoryDetailPage({
 
               <Link
                 href={`/products/${product.id}`}
-                className="mt-5 inline-flex justify-center rounded-xl bg-blue-700 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-800"
+                className="mt-5 inline-flex justify-center rounded-xl bg-orange-600 px-4 py-3 text-sm font-semibold text-white hover:bg-orange-700"
               >
                 View Product
               </Link>
@@ -130,7 +150,7 @@ export default async function CategoryDetailPage({
           </p>
           <Link
             href="/products"
-            className="mt-5 inline-flex rounded-xl bg-blue-700 px-5 py-3 font-semibold text-white hover:bg-blue-800"
+            className="mt-5 inline-flex rounded-xl bg-orange-600 px-5 py-3 font-semibold text-white hover:bg-orange-700"
           >
             Browse All Products
           </Link>

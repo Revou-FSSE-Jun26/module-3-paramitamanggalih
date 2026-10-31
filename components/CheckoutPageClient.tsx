@@ -140,7 +140,7 @@ export default function CheckoutPageClient() {
   return (
     <section className="mx-auto max-w-3xl space-y-8 px-4 py-10 sm:px-6 lg:px-8">
       <div>
-        <p className="text-sm font-semibold uppercase tracking-widest text-blue-700">
+        <p className="text-sm font-semibold uppercase tracking-widest text-orange-600">
           RevoShop
         </p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900">
@@ -161,7 +161,7 @@ export default function CheckoutPageClient() {
           </p>
           <Link
             href="/products"
-            className="mt-5 inline-flex rounded-xl bg-blue-700 px-5 py-3 font-semibold text-white hover:bg-blue-800"
+            className="mt-5 inline-flex rounded-xl bg-orange-600 px-5 py-3 font-semibold text-white hover:bg-orange-700"
           >
             Browse Products
           </Link>
@@ -210,7 +210,7 @@ export default function CheckoutPageClient() {
 
           <div className="flex items-center justify-between border-t border-slate-200 pt-5">
             <span className="font-semibold text-slate-700">Total</span>
-            <span className="text-2xl font-bold text-blue-700">
+            <span className="text-2xl font-bold text-orange-600">
               {formatCurrency(cartTotal)}
             </span>
           </div>
@@ -224,14 +224,14 @@ export default function CheckoutPageClient() {
           <button
             type="submit"
             disabled={isSubmitting || items.length === 0}
-            className="w-full rounded-xl bg-blue-700 px-5 py-3 font-semibold text-white hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full rounded-xl bg-orange-600 px-5 py-3 font-semibold text-white hover:bg-orange-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {isSubmitting ? "Placing order..." : "Confirm Order"}
           </button>
 
           <Link
             href="/cart"
-            className="block text-center text-sm font-semibold text-blue-700 hover:text-blue-900"
+            className="block text-center text-sm font-semibold text-orange-600 hover:text-orange-800"
           >
             Back to Cart
           </Link>

@@ -99,12 +99,12 @@ export default function AdminOrdersClient() {
         <div>
           <Link
             href="/dashboard"
-            className="text-sm font-semibold text-blue-700 hover:text-blue-900"
+            className="text-sm font-semibold text-orange-600 hover:text-orange-800"
           >
             ← Back to Dashboard
           </Link>
 
-          <p className="mt-6 text-sm font-semibold uppercase tracking-widest text-blue-700">
+          <p className="mt-6 text-sm font-semibold uppercase tracking-widest text-orange-600">
             Administration
           </p>
 
@@ -173,7 +173,7 @@ export default function AdminOrdersClient() {
                       {Array.isArray(order.items) ? order.items.length : 0}
                     </td>
                     <td className="px-5 py-4">
-                      <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold capitalize text-blue-700">
+                      <span className="inline-flex rounded-full bg-orange-50 px-3 py-1 text-xs font-semibold capitalize text-orange-600">
                         {order.status}
                       </span>
                     </td>
@@ -208,7 +208,7 @@ export default function AdminOrdersClient() {
               type="button"
               disabled={orders.length < PAGE_SIZE || isLoading}
               onClick={() => setOffset((current) => current + PAGE_SIZE)}
-              className="rounded-xl bg-blue-700 px-4 py-2 font-semibold text-white hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded-xl bg-orange-600 px-4 py-2 font-semibold text-white hover:bg-orange-700 disabled:cursor-not-allowed disabled:opacity-40"
             >
               Next
             </button>
