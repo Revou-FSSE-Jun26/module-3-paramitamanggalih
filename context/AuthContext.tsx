@@ -26,8 +26,22 @@ interface AuthContextValue {
 }
 
 const STORAGE_KEY = "revoshop_user";
+const ROLE_COOKIE = "revoshop_role";
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+
+function updateRoleCookie(role: UserRole | null) {
+  const secure =
+    window.location.protocol === "https:" ? "; Secure" : "";
+
+  if (role) {
+    document.cookie =
+      `${ROLE_COOKIE}=${role}; Path=/; Max-Age=604800; SameSite=Lax${secure}`;
+  } else {
+    document.cookie =
+      `${ROLE_COOKIE}=; Path=/; Max-Age=0; SameSite=Lax${secure}`;
+  }
+}
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
@@ -56,16 +70,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             };
 
             setUser(restoredUser);
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(restoredUser));
+            localStorage.setItem(
+              STORAGE_KEY,
+              JSON.stringify(restoredUser)
+            );
+            updateRoleCookie(restoredUser.role);
           } else {
             localStorage.removeItem(STORAGE_KEY);
+            updateRoleCookie(null);
           }
         } else {
           localStorage.removeItem(STORAGE_KEY);
+          updateRoleCookie(null);
         }
+      } else {
+        updateRoleCookie(null);
       }
     } catch {
       localStorage.removeItem(STORAGE_KEY);
+      updateRoleCookie(null);
     } finally {
       setIsLoading(false);
     }
@@ -73,11 +96,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = useCallback((nextUser: AuthUser) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(nextUser));
+    updateRoleCookie(nextUser.role);
     setUser(nextUser);
   }, []);
 
   const logout = useCallback(() => {
     localStorage.removeItem(STORAGE_KEY);
+    updateRoleCookie(null);
     setUser(null);
   }, []);
 

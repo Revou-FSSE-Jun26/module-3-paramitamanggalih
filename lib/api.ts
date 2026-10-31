@@ -62,3 +62,15 @@ export async function getOrders(
 
   return apiFetch<Order[]>(`/orders?${params.toString()}`);
 }
+
+export interface CategoryDetail extends Category {
+  products: Product[];
+}
+
+export async function getCategory(
+  id: string | number
+): Promise<CategoryDetail> {
+  return apiFetch<CategoryDetail>(
+    `/categories/${encodeURIComponent(String(id))}`
+  );
+}

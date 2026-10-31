@@ -48,7 +48,7 @@ export default async function CategoriesPage() {
                 </p>
 
                 <Link
-                  href={`/products?category=${category.id}`}
+                  href={`/categories/${category.id}`}
                   className="mt-5 inline-flex rounded-lg bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800"
                 >
                   View products
