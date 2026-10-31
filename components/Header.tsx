@@ -23,7 +23,11 @@ export default function Header() {
       ? [{ href: "/orders", label: "My Orders" }]
       : []),
     ...(user?.role === "admin"
-      ? [{ href: "/dashboard", label: "Dashboard" }]
+      ? [
+          { href: "/dashboard", label: "Admin" },
+          { href: "/dashboard/categories", label: "Manage Categories" },
+          { href: "/dashboard/orders", label: "Manage Orders" },
+        ]
       : []),
   ];
 
@@ -59,6 +63,9 @@ export default function Header() {
         >
           {navigation.map((item) => {
             const active = isActiveRoute(item.href);
+            const isAdminLink =
+              user?.role === "admin" &&
+              item.href.startsWith("/dashboard");
 
             return (
               <Link
@@ -68,7 +75,9 @@ export default function Header() {
                 className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
                   active
                     ? "bg-orange-600 text-white"
-                    : "text-slate-600 hover:bg-orange-50 hover:text-orange-600"
+                    : isAdminLink
+                      ? "bg-orange-50 text-orange-700 hover:bg-orange-100"
+                      : "text-slate-600 hover:bg-orange-50 hover:text-orange-600"
                 }`}
               >
                 {item.label}
