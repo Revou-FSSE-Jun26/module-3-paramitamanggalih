@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
 
 const publicNavigation = [
   { href: "/", label: "Home" },
@@ -14,6 +15,7 @@ export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const { user, isLoading, logout } = useAuth();
+  const { cartCount, isLoaded: cartLoaded } = useCart();
 
   const navigation = [
     ...publicNavigation,
@@ -35,6 +37,8 @@ export default function Header() {
     router.replace("/");
     router.refresh();
   }
+
+  const cartActive = isActiveRoute("/cart");
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200 bg-white shadow-sm">
@@ -71,6 +75,31 @@ export default function Header() {
               </Link>
             );
           })}
+
+          <Link
+            href="/cart"
+            aria-current={cartActive ? "page" : undefined}
+            aria-label={`Shopping cart, ${cartCount} items`}
+            className={`inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+              cartActive
+                ? "bg-blue-700 text-white"
+                : "text-slate-600 hover:bg-blue-50 hover:text-blue-700"
+            }`}
+          >
+            <span>Cart</span>
+
+            {cartLoaded && (
+              <span
+                className={`ml-2 inline-flex min-w-5 items-center justify-center rounded-full px-1.5 py-0.5 text-xs font-bold ${
+                  cartActive
+                    ? "bg-white text-blue-700"
+                    : "bg-blue-100 text-blue-700"
+                }`}
+              >
+                {cartCount}
+              </span>
+            )}
+          </Link>
         </nav>
 
         <div className="flex flex-wrap items-center gap-2">
@@ -79,9 +108,11 @@ export default function Header() {
               <span className="text-sm font-medium text-slate-700">
                 Hi, {user.name}
               </span>
+
               <span className="rounded-full bg-slate-100 px-2 py-1 text-xs font-semibold capitalize text-slate-600">
                 {user.role}
               </span>
+
               <button
                 type="button"
                 onClick={handleLogout}
@@ -98,6 +129,7 @@ export default function Header() {
               >
                 Login
               </Link>
+
               <Link
                 href="/register"
                 className="rounded-full bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800"
